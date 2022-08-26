@@ -9,18 +9,19 @@ class SalesPointsController extends Controller
 {
     public function create(Request $request)
     {
-       $points = new Point();
-       $points->id = $request->id;
+       $points = new SalesPoints();
        $points->name = $request->name;
        $points->info = $request->info;
        $points->adress = $request->adress;
        $points->user_id = $request->user_id;
        $points->save();
 
+       return $points;
+
     }
     public function list()
     {
-        $points = Point::get();
+        $points = SalesPoints::get();
         return $points;
     }
 
@@ -32,27 +33,21 @@ class SalesPointsController extends Controller
         }
         else
         {
-            $points = Point::where('id', $id)->exception();
+            $points = SalesPoints::where('id', $id)->first();
             return $points;
         }
     }
 
-    public function update(Request $request, Point $point)
+    public function update(Request $request, $id)
     {
-        $request->validate([
-            'id' => 'required',
-            'name' => 'required',
-            'info' => 'required',
-            'adress' => 'required',
-            'user_id' => 'required',
-        ]);
-
+        $point = SalesPoints::find($id);
         $point->update($request->all());
+        return $point; 
 
         return $point; 
     }
-    public function delete(Point $point)
+    public function delete($id)
     {
-        $points->delete();
+        SalesPoints::destroy($id);
     } 
 }

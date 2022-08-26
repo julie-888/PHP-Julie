@@ -30,23 +30,20 @@ class TagsController extends Controller
         }
         else
         {
-            $tags = Tag::where('name', $name)->exception();
+            $tags = Tag::where('name', $name)->first();
             return $tags;
         }
     }
 
-    public function update(Request $request, $name)
+    public function update(Request $request, $id)
     {
-        $data = $request->validate([
-            'name' => 'required',
-        ]);
-
-        $tag->update($data);
+        $tag = Tag::find($id);
+        $tag->update($request->all());
 
         return $tag; 
     }
-    public function delete($name)
+    public function delete($id)
     {
-      Tag::destroy($name);
+      Tag::destroy($id);
     }
 }

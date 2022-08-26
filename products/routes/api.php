@@ -42,8 +42,8 @@ Route::delete('producttag', [ProductTagsController::class,'delete']);
 
 Route::post('salespoint', [SalesPointsController::class,'create']);
 Route::get('salespoints', [SalesPointsController::class,'list']);
-Route::get('salespoint', [SalesPointsController::class,'position']);
-Route::put('salespoint', [SalesPointsController::class,'update']);
-Route::delete('salespoint', [SalesPointsController::class,'delete']);
+Route::get('salespoint/{id}', [SalesPointsController::class,'position']);
+Route::put('salespoint/{id}', [SalesPointsController::class,'update']);
+Route::delete('salespoint/{id}', [SalesPointsController::class,'delete']);
 
 
