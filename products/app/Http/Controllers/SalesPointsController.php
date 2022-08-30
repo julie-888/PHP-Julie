@@ -44,7 +44,6 @@ class SalesPointsController extends Controller
         $point->update($request->all());
         return $point; 
 
-        return $point; 
     }
     public function delete($id)
     {

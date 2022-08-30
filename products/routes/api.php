@@ -36,9 +36,9 @@ Route::delete('tag/{id}', [TagsController::class,'delete']);
 
 Route::post('producttag', [ProductTagsController::class,'create']);
 Route::get('producttags', [ProductTagsController::class,'list']);
-Route::get('producttag', [ProductTagsController::class,'position']);
-Route::put('producttag', [ProductTagsController::class,'update']);
-Route::delete('producttag', [ProductTagsController::class,'delete']);
+Route::get('producttag/{id}', [ProductTagsController::class,'position']);
+Route::put('producttag/{id}', [ProductTagsController::class,'update']);
+Route::delete('producttag/{id}', [ProductTagsController::class,'delete']);
 
 Route::post('salespoint', [SalesPointsController::class,'create']);
 Route::get('salespoints', [SalesPointsController::class,'list']);

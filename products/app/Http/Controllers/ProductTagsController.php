@@ -9,44 +9,42 @@ class ProductTagsController extends Controller
 {
     public function create(Request $request)
     {
-       $prodtags = new ProdTag();
+       $prodtags = new ProductTags();
        $prodtags->product_id = $request->product_id;
        $prodtags->tag_id = $request->tag_id;
        $prodtags->save();
 
+       return $prodtags;
+
     }
     public function list()
     {
-        $prodtags = ProdTag::get();
+        $prodtags = ProductTags::get();
         return $prodtags;
     }
 
-    public function position($tag_id)
+    public function position($id)
     {
-        if (empty($tag_id))
+        if (empty($id))
         {
-        throw new NotFoundException("tag_id not specified!");
+        throw new NotFoundException("id not specified!");
         }
         else
         {
-            $prodtags = ProdTag::where('tag_id', $tag_id)->exception();
+            $prodtags = ProductTags::where('id', $id)->first();
             return $prodtags;
         }
     }
 
-    public function update(Request $request, Tag $tag)
+    public function update(Request $request, $id)
     {
-        $request->validate([
-            'product_id' => 'required',
-            'tag_id' => 'required',
-        ]);
+        $prodtag = ProductTags::find($id);
+        $prodtag->update($request->all());
+        return $prodtag; 
 
-        $tag->update($request->all());
-
-        return $tag; 
     }
-    public function delete(Tag $tag)
+    public function delete($id)
     {
-      $tag->delete();
+        ProductTags::destroy($id);
     }
 }
