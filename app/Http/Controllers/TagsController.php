@@ -1,0 +1,49 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use Illuminate\Http\Request;
+use App\Models\Tag;
+
+class TagsController extends Controller
+{
+    public function create(Request $request)
+    {
+       $tags = new Tag();
+       $tags->name = $request->name;
+       $tags->save();
+
+       return $tags;
+
+    }
+    public function list()
+    {
+        $tags = Tag::get();
+        return $tags;
+    }
+
+    public function position($name)
+    {
+        if (empty($name))
+        {
+        throw new NotFoundException("name not specified!");
+        }
+        else
+        {
+            $tags = Tag::where('name', $name)->first();
+            return $tags;
+        }
+    }
+
+    public function update(Request $request, $id)
+    {
+        $tag = Tag::find($id);
+        $tag->update($request->all());
+
+        return $tag; 
+    }
+    public function delete($id)
+    {
+      Tag::destroy($id);
+    }
+}
